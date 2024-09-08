@@ -1,12 +1,13 @@
 import http from "http";
+import { getItems } from "./controllers/itemController.js";
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
   const { pathname } = url;
 
-  if (req.method == "GET" && pathname == "/hello-world") {
-    res.end("<h1>Hello World</h1>");
+  if (req.method == "GET" && pathname == "/items") {
+    await getItems();
   } else {
     res.statusCode = 404;
     res.end("Not Found");
