@@ -7,7 +7,7 @@ const server = http.createServer(async (req, res) => {
   const { pathname } = url;
 
   if (req.method == "GET" && pathname == "/items") {
-    await getItems();
+    await getItems(req, res);
   } else {
     res.statusCode = 404;
     res.end("Not Found");
