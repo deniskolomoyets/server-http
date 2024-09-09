@@ -37,11 +37,11 @@ export const createItem = async (req, res) => {
     });
 
     req.on("end", async () => {
-      const items = JSON.parse(body);
-      const newItemId = await itemModel.createItem(item);
+      const item = JSON.parse(body);
+      await itemModel.createItem(item);
       res.statusCode = 201;
       res.setHeader("Content-type", "application/json");
-      res.end(JSON.stringify({ id: newItemId }));
+      res.end(JSON.stringify("Ok"));
     });
   } catch {
     res.statusCode = 500;
