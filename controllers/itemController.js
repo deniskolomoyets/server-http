@@ -28,3 +28,23 @@ export const getItemById = async (req, res, id) => {
     res.end(`Error: ${err.message} `);
   }
 };
+
+export const createItem = async (req, res) => {
+  try {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", async () => {
+      const items = JSON.parse(body);
+      const newItemId = await itemModel.createItem(item);
+      res.statusCode = 201;
+      res.setHeader("Content-type", "application/json");
+      res.end(JSON.stringify({ id: newItemId }));
+    });
+  } catch {
+    res.statusCode = 500;
+    res.end(`Error: ${err.message} `);
+  }
+};
