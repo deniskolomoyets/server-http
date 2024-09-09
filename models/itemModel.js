@@ -38,12 +38,12 @@ export const itemModel = {
       );
     });
   },
-  updateItem: function (id, items) {
+  updateItem: function (id, item) {
     return new Promise((resolve, reject) => {
       db.run(
         "UPDATE items SET name=?, description=? WHERE id=?",
-        [item.name, item.description, item.id],
-        (err) => {
+        [item.name, item.description, id],
+        function (err) {
           if (err) {
             reject(err);
           } else {
