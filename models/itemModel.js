@@ -38,4 +38,30 @@ export const itemModel = {
       );
     });
   },
+  updateItem: function (id, items) {
+    return new Promise((resolve, reject) => {
+      db.run(
+        "UPDATE items SET name=?, description=? WHERE id=?",
+        [item.name, item.description, item.id],
+        (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(this.changes);
+          }
+        }
+      );
+    });
+  },
+  deleteItem: function (id) {
+    return new Promise((resolve, reject) => {
+      db.run("DELETE FROM items WHERE id=?", [id], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(this.changes);
+        }
+      });
+    });
+  },
 };
