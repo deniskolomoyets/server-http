@@ -16,7 +16,13 @@ const server = http.createServer(async (req, res) => {
     res.end("Invalid URL");
     return;
   }
-  const { pathname } = url; //Destructuring
+  const { pathname } = url; // Destructuring
+
+  if (!["GET", "POST", "PUT", "DELETE"].includes(req.method)) {
+    res.statusCode = 405;
+    res.end("Method Not Allowed");
+    return;
+  }
 
   if (req.method == "GET" && pathname == "/items") {
     await getItems(req, res);
