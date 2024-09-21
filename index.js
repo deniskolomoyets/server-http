@@ -10,7 +10,7 @@ import {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  const { pathname } = url;
+  const { pathname } = url; //Destructuring
 
   if (req.method == "GET" && pathname == "/items") {
     await getItems(req, res);
