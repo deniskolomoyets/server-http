@@ -8,8 +8,14 @@ import {
 } from "./controllers/itemController.js";
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
-
+  let url;
+  try {
+    url = new URL(req.url, `http://${req.headers.host}`);
+  } catch (err) {
+    res.statusCode = 400;
+    res.end("Invalid URL");
+    return;
+  }
   const { pathname } = url; //Destructuring
 
   if (req.method == "GET" && pathname == "/items") {
