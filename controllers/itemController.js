@@ -4,8 +4,8 @@ export const getItems = async (req, res) => {
   try {
     const items = await itemModel.getAllItems();
 
-    res.setHeader("Content-type", "application/json");
-    res.end(JSON.stringify(items));
+    res.setHeader("Content-type", "application/json"); //A response header is set indicating that the content type is JSON
+    res.end(JSON.stringify(items)); //The server then sends a response to the client with a JSON string that contains all the items received
   } catch (err) {
     res.statusCode = 500;
     res.end(`Error: ${err.message}`);
